@@ -1,0 +1,130 @@
+<div class="container mt" angular-busy="loading">
+    <form class="padding" ng-submit="boycottStart.save()" name="boycottForm">
+        <div class="form-group">
+            <label for="boycottForm_concerns">
+                <required></required> Muhataplar
+            </label>
+            <concern-multiple
+                ng-model="boycottStart.data.concern_ids"
+                ng-required="true"
+            ></concern-multiple>
+            <p class="help-block">Kimi veya hangi kurumu boykot ediyorsunuz?</p>
+        </div>
+        <div class="form-group">
+            <label for="boycottForm_title">
+                <required></required> Başlık
+            </label>
+            <dg-form-text
+                ng-model="boycottStart.data.title"
+                dg-id="boycottForm_title"
+                maxlength="100"
+                ng-required="true"
+            ></dg-form-text>
+            <p class="help-block">Etkileyici bir başlık yazın.</p>
+        </div>
+        <div class="form-group">
+            <label for="boycottForm_startsOn">
+                <required></required> Başlangıç tarihi
+            </label>
+            <dg-form-date
+                ng-model="boycottStart.data.startsOn"
+                dg-id="boycottForm_startsOn"
+                ng-required="true"
+            ></dg-form-date>
+            <p class="help-block">Ne zaman başlayacak?</p>
+        </div>
+        <div class="form-group">
+            <label for="boycottForm_description">
+                <required></required> Neden?
+            </label>
+            <dg-form-html
+                ng-model="boycottStart.data.description"
+                dg-id="boycottForm_description"
+                ng-required="true"
+                maxlength="10000"
+                ta-toolbar="[['h1', 'h2', 'h3'], ['bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol', 'insertLink'], ['redo', 'undo']]"
+            ></dg-form-html>
+            <p class="help-block">Neden bu boykotu başlatıyorsunuz? Neyi hedefliyorsunuz? Boykotunuzun destek bulması için iddianızı en iyi şekilde savunun.</p>
+        </div>
+        <div class="form-group">
+            <label for="boycottForm_images">
+                <required></required> Görseller
+            </label>
+            <div class="display-block">
+                <button
+                    type="button"
+                    class="btn btn-default mb"
+                    ngf-select="boycottStart.uploadFiles($files, $invalidFiles)"
+                    id="boycottForm_images"
+                    name="boycottForm_images"
+                    ngf-pattern="'.jpg,.jpeg,.JPEG,.JPG'"
+                    ngf-accept="'image/*'"
+                    ngf-max-size="'2MB'"
+                    multiple
+                >Yükle <span ng-if="bodyImage.progress" ng-bind="'%' + bodyImage.progress"></span></button>
+            </div>
+
+            <span ng-if="bodyImage.tag">
+                Yüklediğiniz resmi kullanmak için şu kodu ekleyin:
+                <strong ng-bind="bodyImage.tag"></strong>
+            </span>
+
+            <ul>
+                <li ng-repeat="file in boycottStart.files.invalid">
+                    <strong ng-bind="file.name"></strong>:
+                    <span ng-if="file.$error === 'maxSize'">
+                        En fazla <strong ng-bind="file.$errorParam"></strong> büyüklüğünde bir resim yükleyebilirsiniz.
+                    </span>
+                    <span ng-if="file.$error === 'pattern'">
+                        Sadece <strong>jpg</strong> yükleyebilirsiniz.
+                    </span>
+                </li>
+            </ul>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-2" ng-repeat-start="file in boycottStart.files.valid">
+                    <img ngf-thumbnail="file" class="img-responsive">
+                    <uib-progressbar
+                            max="100"
+                            value="file.progress"
+                            ng-if="!file.result.path"
+                    ></uib-progressbar>
+                </div>
+
+                <div
+                    class="clearfix"
+                    ng-class="{
+                        'visible-xs-block': true,
+                        'visible-sm-block': $index % 4 === 2,
+                        'visible-md-block visible-lg-block': $index % 6 === 3,
+                    }"
+                    ng-repeat-end
+                ></div>
+            </div>
+
+            <div ng-if="articleForm.article_bodyImage.$error && !bodyImage.file.path" class="text-danger">
+                <p ng-if="articleForm.article_bodyImage.$error.maxSize">
+                    En fazla <strong>200KB</strong> büyüklüğünde bir resim yükleyebilirsiniz.
+                </p>
+                <p ng-if="articleForm.article_bodyImage.$error.pattern">
+                    Sadece <strong>jpg</strong> yükleyebilirsiniz.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="boycottForm_relatedLinks">
+                İlgili bağlantılar
+            </label>
+            <dg-form-text
+                type="url"
+                ng-repeat="link in boycottStart.data.relatedLinks track by $index"
+                ng-model="boycottStart.data.relatedLinks[$index]"
+                dg-id="boycottForm_relatedLinks"
+                placeholder="https://sendika.org/haber"
+            ></dg-form-text>
+            <button type="button" class="btn" ng-click="boycottStart.data.relatedLinks.push('')">Ekle</button>
+            <p class="help-block">Boykotunuzu desteklemek için haber bağlantıları ekleyin.</p>
+        </div>
+        <button type="submit" class="btn btn-danger btn-start-boycott">BOYKOTA BAŞLA!</button>
+    </form>
+</div>

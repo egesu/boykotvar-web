@@ -1,0 +1,26 @@
+<ui-select
+    class="full-width {{ searcher.loading ? 'ui-select-loading' : '' }}"
+    ng-attr-id="{{ dgId }}"
+    ng-model="$parent.model"
+    multiple
+    ui-select-required="{{ required ? true : false }}"
+    on-select="ngChange()"
+    ng-attr-form="{{ attrs.form ? attrs.form : null }}"
+    spinner-enabled="true"
+    spinner-class="glyphicon glyphicon-repeat"
+>
+    <ui-select-match placeholder="Muhatap seçin" allow-clear="{{ allowClear }}">
+        <p><strong ng-bind="$item.name"></strong></p>
+    </ui-select-match>
+    <ui-select-choices
+        repeat="item.id as item in searchResults"
+        refresh="search($select.search)"
+    >
+        <p>
+            <strong ng-if="!item.userCreated" ng-bind-html="item.name | highlight: $select.search"></strong>
+            <span ng-if="item.userCreated">
+                <strong ng-bind="item.name"></strong> muhatabı bulunamadı. Eklemek için tıklayın.
+            </span>
+        </p>
+    </ui-select-choices>
+</ui-select>

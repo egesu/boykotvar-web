@@ -1,0 +1,18 @@
+{
+    "development": {
+        "environmentConfig": {
+            "apiV1": {
+                "url": "http://api.boykotvar.dev/v1"
+            },
+            "name": "local"
+        }
+    },
+    "production": {
+        "environmentConfig": {
+            "apiV1": {
+                "url": "http://api.boykotvar.org/v1"
+            },
+            "name": "production"
+        }
+    }
+}

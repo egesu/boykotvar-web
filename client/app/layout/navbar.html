@@ -1,0 +1,73 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+                </li>
+                <li>
+                    <a ui-sref="">Nasıl çalışır? <span class="sr-only">(aktif)</span></a>
+                </li>
+                <li>
+                    <a ui-sref="">Neden boykot? <span class="sr-only">(aktif)</span></a>
+                </li>
+                <li>
+                    <a class="text-danger" href="start-boycott">Boykot başlat! <span class="sr-only">(aktif)</span></a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" ng-controller="LoginController as login" ng-if="!app.currentUser.id">
+                <li uib-dropdown auto-close="outsideClick">
+                    <a id="btn-login" uib-dropdown-toggle>
+                        Giriş yap
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right padding login-dropdown" uib-dropdown-menu aria-labelledby="btn-login">
+                        <li>
+                            <form ng-submit="login.login()">
+                                <div class="form-group">
+                                    <label for="login_email" class="control-label">
+                                        Kullanıcı adı
+                                    </label>
+                                    <dg-form-text
+                                        type="email"
+                                        id="login_email"
+                                        ng-required="true"
+                                        ng-model="login.data.email"
+                                    ></dg-form-text>
+                                </div>
+                                <div class="form-group">
+                                    <label for="login_password" class="control-label">
+                                        Parola
+                                    </label>
+                                    <dg-form-text
+                                        type="password"
+                                        id="login_password"
+                                        ng-required="true"
+                                        ng-model="login.data.password"
+                                    ></dg-form-text>
+                                </div>
+                                <button class="btn btn-default" type="submit">Gönder</button>
+                                <button class="btn btn-primary" type="button" ng-click="app.openRegisterModal()">Kayıt ol</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" ng-controller="LoginController as login" ng-if="app.currentUser.id">
+                <li uib-dropdown auto-close="outsideClick">
+                    <a id="btn-user" uib-dropdown-toggle>
+                        <span ng-bind="app.currentUser.name"></span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu aria-labelledby="btn-user">
+                        <li>
+                            <a>Ayarlar</a>
+                        </li>
+                        <li>
+                            <a ng-click="login.logout()">Çıkış</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

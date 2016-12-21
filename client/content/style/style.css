@@ -1,0 +1,54 @@
+a {
+    cursor: pointer;
+}
+
+.navbar {
+    margin: 0;
+}
+
+.mb {
+    margin-bottom: 20px;
+}
+
+.mt {
+    margin-top: 20px;
+}
+
+.padding {
+    padding: 10px;
+}
+
+.carousel-inner, .carousel-inner .item {
+    height: 400px;
+}
+
+.login-dropdown {
+    min-width: 300px;
+}
+
+.text-danger, .text-danger:hover {
+  color: #ff0039 !important;
+}
+
+.hidden-select {
+    height: 1px;
+    width: 1px;
+    border: 0;
+    padding: 0;
+    float: left;
+}
+
+.uib-datepicker .btn-default {
+    background-color: #eee;
+    border-color: #ccc;
+    color: unset;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+.btn-start-boycott {
+    width: 100%;
+    font-size: 1.5em;
+}

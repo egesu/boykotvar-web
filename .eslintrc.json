@@ -1,0 +1,12 @@
+{
+    "extends": "angular",
+    "parserOptions": {
+        "ecmaVersion": 5
+    },
+    "rules": {
+        "semi": ["error", "always"]
+    },
+    "env": {
+        "browser": true
+    }
+}
